@@ -17,10 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', array('as' => 'page.home', 'uses' => 'HomeController@index'));
 
 Route::resource('admin/users', 'AdminUsersController');
 
-Route::get('/admin', function() {
+Route::get('/admin', array('as' => 'page.admin', function() {
     return view('admin.index');
-});
+}));
+
+Route::get('/admin/datatables', array('as' => 'page.datatables', 'uses' => 'DatatablesController@anyData'));
+
+
